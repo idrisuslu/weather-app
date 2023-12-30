@@ -1,12 +1,4 @@
-import {
-  Animated,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  useWindowDimensions,
-} from "react-native";
+import { Animated, StyleSheet, useWindowDimensions } from "react-native";
 import DailyWeatherItem from "../DailyWeatherItem";
 import { useState } from "react";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
@@ -29,41 +21,6 @@ const DailyWeather = (props: DailyWeatherProps) => {
   const localeCurrentDate = convertUTCDateToLocalDate(currentDate);
 
   const [selectedDate, setSelectedDate] = useState(localeCurrentDate);
-
-  // const tomorrow = new Date(localeCurrentDate);
-  // tomorrow.setDate(localeCurrentDate.getDate() + 1);
-
-  // const fiveDayDates = [localeCurrentDate.getUTCDate()];
-  // for (let index = 1; index < 6; index++) {
-  //   const nextDay = new Date(localeCurrentDate);
-  //   nextDay.setDate(localeCurrentDate.getDate() + index);
-  //   fiveDayDates.push(nextDay.getUTCDate());
-  // }
-
-  // const todayWeatherData = data?.list.filter((item) => {
-  //   const date = new Date(item?.dt_txt + "Z");
-  //   const localeDate = convertUTCDateToLocalDate(date);
-
-  //   return localeDate.getUTCDate() === selectedDate.getUTCDate();
-  // });
-
-  // const changeDate = (number) => {
-  //   const newDate = new Date(selectedDate);
-  //   newDate.setDate(newDate.getDate() + number);
-
-  //   if (fiveDayDates.includes(newDate.getUTCDate())) {
-  //     setSelectedDate(newDate);
-  //   }
-  // };
-
-  // const title =
-  //   localeCurrentDate.getUTCDate() === selectedDate.getUTCDate()
-  //     ? "Today"
-  //     : selectedDate.getUTCDate() === tomorrow.getUTCDate()
-  //     ? "Tomorrow"
-  //     : null;
-
-  /*****************************************************************************************/
 
   const av = new Animated.Value(0);
   av.addListener(() => {
@@ -141,12 +98,9 @@ const DailyWeather = (props: DailyWeatherProps) => {
       {...props}
       scrollEnabled={true}
       indicatorStyle={{ backgroundColor: "white" }}
-      // style={{ backgroundColor: "pink" }}
       tabStyle={{ width: 120 }}
     />
   );
-
-  console.log(newWeatherData[0][0]);
 
   return (
     <TabView
@@ -157,54 +111,6 @@ const DailyWeather = (props: DailyWeatherProps) => {
       style={{ width: layout.width, height: 500 }}
     />
   );
-
-  /*****************************************************************************************/
-
-  // return (
-  //   <ScrollView style={{ width: "80%" }}>
-  //     <View
-  //       style={{
-  //         display: "flex",
-  //         justifyContent: "space-between",
-  //         flexDirection: "row",
-  //         gap: 20,
-  //       }}
-  //     >
-  //       <Pressable style={styles.button} onPress={() => changeDate(-1)}>
-  //         <Text
-  //           style={{
-  //             ...styles.text,
-  //             color:
-  //               fiveDayDates[0] === selectedDate.getUTCDate()
-  //                 ? "#d1d1d1"
-  //                 : "black",
-  //           }}
-  //         >
-  //           ←
-  //         </Text>
-  //       </Pressable>
-  //       <Pressable style={styles.button} onPress={() => changeDate(1)}>
-  //         <Text
-  //           style={{
-  //             ...styles.text,
-  //             color:
-  //               fiveDayDates[fiveDayDates.length - 1] ===
-  //               selectedDate.getUTCDate()
-  //                 ? "#d1d1d1"
-  //                 : "black",
-  //           }}
-  //         >
-  //           →
-  //         </Text>
-  //       </Pressable>
-  //     </View>
-  //     <DailyWeatherItem
-  //       day={selectedDate}
-  //       weatherData={todayWeatherData}
-  //       title={title}
-  //     />
-  //   </ScrollView>
-  // );
 };
 
 const styles = StyleSheet.create({

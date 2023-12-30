@@ -1,20 +1,9 @@
 import { useEffect, useState } from "react";
-import {
-  Image,
-  ImageBackground,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  useWindowDimensions,
-} from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import * as Location from "expo-location";
 import DailyWeather from "./components/DailyWeather";
-// import image from "./assets/weather-conditions/clear-sky.jpg"
 
 export default function App() {
-  const layout = useWindowDimensions();
   const [location, setLocation] = useState<Location.LocationObject>();
   const [address, setAddress] = useState<Location.LocationGeocodedAddress>();
   const [weatherData, setWeatherData] = useState<any>();
@@ -68,11 +57,6 @@ export default function App() {
 
   return (
     <ScrollView style={{ backgroundColor: "#CCD5F5", paddingVertical: 60 }}>
-      {/* <ImageBackground
-       resizeMode="cover"
-       source={require("./assets/weather-conditions/clear-sky.jpg")}
-       style={styles.image}
-    > */}
       <View
         style={{
           display: "flex",
@@ -80,7 +64,6 @@ export default function App() {
           alignItems: "center",
         }}
       >
-        {/* <SafeAreaView style={{ display: "flex", alignItems: "center" }}> */}
         {address && <Text style={styles.titleText}>{address?.subregion}</Text>}
 
         {weatherData && (
@@ -104,8 +87,6 @@ export default function App() {
         )}
         {fiveDayWeatherData && <DailyWeather data={fiveDayWeatherData} />}
       </View>
-      {/* </SafeAreaView> */}
-      {/* </ImageBackground> */}
     </ScrollView>
   );
 }
